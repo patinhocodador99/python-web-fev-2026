@@ -10,15 +10,6 @@ app = Flask(__name__)
 def home():
     return render_template('index.html')
 
-@app.route('/nome')
-
-def exibir_nome():
-    return "Danilo"
-
-@app.route('/nome/sobrenome')
-def exibir_sobrenome():
-    return "Souza Miguel"
-
 if __name__ == '__main__':
     app.run(
         host=os.getenv("FLASK_HOST"),
