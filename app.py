@@ -6,6 +6,12 @@ load_dotenv()
 
 app = Flask(__name__)
 
+@app.route('/name')
+def username():
+    name = "Sthefanie"
+    
+    return render_template('user.html', username=name)
+
 @app.route('/')
 def home():
     return render_template('index.html')

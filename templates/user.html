@@ -14,11 +14,20 @@
 
     <main>
         <h2>Olá, {{ username }}!</h2>
-        {% if username|length > 10 %}
+        {% if username | length > 10 %}
             <p>Seu nome de usuário é longo!</p>
         {% else %}
             <p>Seu nome de usuário é curto!</p>
         {% endif %}
+
+        <p> Nome em maiúsculas: {{ username | upper }}</p>
+        <p> Nome em minúsculas: {{ username | lower }}</p>
+            <p> Nome capitalizado: {{ username | capitalize }}</p>
+            <p> Nome com a primeira letra de cada palavra em maiúscula: {{ username | title }}</p>
+            <p> Nome invertido: {{ username | reverse }}</p>
+            <p> Nome truncado (máximo 5 caracteres): {{ username | truncate(5) }}</p>
+            <p> Nome sem espaços extras: {{ username | trim }}</p>
+            <p> Nome sem caracteres HTML: {{ username | striptags }}</p>
     </main>
 
 </body>
