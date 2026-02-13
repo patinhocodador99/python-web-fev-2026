@@ -20,7 +20,7 @@ def conectar():
     
 @app.before_request
 def before_request():
-    g.db.conectar()
+    g.db = conectar()
 
 @app.teardown_request
 def teardown_request(exception):
@@ -40,10 +40,12 @@ def exibir_posts():
         })        
 
     return render_template("exibir_posts.html", posts=posts)
-  
+
+@app.route('/login')
 def login():
     return render_template("login.html")
 
+@app.route('/logout')
 def logout():
     return render_template("exibir_posts.html")
  
