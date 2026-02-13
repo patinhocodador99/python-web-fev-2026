@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+    <div class ="conteudo_principal">
+        <h1> Blog </h1>
+    </div>
+    <div class = "nav">
+        {% if not session.logado %}
+            <a href="{{ url_for('login') }}">Login</a>
+        {% else %}
+            <a href="{{ url_for('logout') }}">Logout</a>
+        {% endif %}
+    </div>
+
+    {% for mensagem in get_flashed_messages() %}
+        <div class="flash">{{ mensagem }}</div>
+    {% endfor %}
+    {% block corpo %}
+    {% endblock %}
+
+
+</body>
+</html>

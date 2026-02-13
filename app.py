@@ -2,20 +2,51 @@ import os
 from flask import Flask, render_template
 from dotenv import load_dotenv
 
+import sqlite3
+
+DATABASE = "banco.db"
+
+SECRET_KEY = "1234"
+
+
 load_dotenv() 
 
 app = Flask(__name__)
 
-@app.route('/name')
-def username():
-    name = "Sthefanie"
+app.config.from_object(__name__)
+
+def conectar():
+    return sqlite3.connect(DATABASE)
     
-    return render_template('user.html', username=name)
+@app.before_request
+def before_request():
+    g.db.conectar()
 
+@app.teardown_request
+def teardown_request(exception):
+    g.db.close()  
+        
 @app.route('/')
-def home():
-    return render_template('index.html')
+def exibir_posts():
+    sql = "SELECT título, texto, data_criacao from posts ORDER BY id DESC"
+    resultado = g.db.execute(sql)
+    posts = []
+    
+    for titulo, texto, data_criacao in resultado.fetchall():
+        posts.append({
+            "titulo": titulo,
+            "texto": texto,
+            "data_criacao": data_criacao    
+        })        
 
+    return render_template("exibir_posts.html", posts=posts)
+  
+def login():
+    return render_template("login.html")
+
+def logout():
+    return render_template("exibir_posts.html")
+ 
 if __name__ == '__main__':
     app.run(
         host=os.getenv("FLASK_HOST"),

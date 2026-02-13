@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block corpo %}
+
+{% if erro %}
+<div class = "erro">{{ erro }}</div>
+{% endif %}
+
+<form method="POST" action="/login">
+    <dl>
+        <dt>Username</dt>
+        <dd><input type="text" name="username"></dd>
+       
+        <dt>Password</dt>
+        <dd><input type="password" name="password"></dd>
+
+        <dd><input type="submit" value="Login"></dd>
+    </dl>
+</form>
+
+{% endblock %}
